@@ -1,0 +1,116 @@
+<div class="section_inwrapper">
+    <div class="products_main" style="padding: 20px 0; ">
+
+    <div class="row">
+        
+        <div class="col s6 left">
+            <div class="avaContainer left">
+                <?php if($this->identity()->getThumbnail() && $this->identity()->getAvatar()):  ?>
+                    <a href="<?php echo $this->basePath("img/user/{$this->identity()->getAvatar()}") ?>" data-lightbox="roadtrip">
+                        <img src="<?php echo $this->basePath("img/user/user{$this->identity()->getThumbnail()}") ?>" width="100%" class="left">
+                    </a>  
+                <?php else:  ?>
+                    <?php if($this->identity()->getAvatar() && !$this->identity()->getThumbnail()): ?>
+                        <img src="<?php echo $this->basePath("img/noPhoto.jpg") ?>" width="100%">
+                        <p style="color: #444; "><b>Please, crop img to see in avatar</b></p>
+                    <?php else:  ?>
+                        <img src="<?php echo $this->basePath("img/noPhoto.jpg") ?>" width="100%">
+                        <p style="color: #444; "><b>Please, upload img to see in avatar</b></p>
+                    <?php endif;  ?>
+                <?php endif;  ?>
+            </div>
+            <div class="pers left">
+                <p>
+                    <i class="material-icons left">star</i>
+                    <?php echo $this->identity()->getNick();  ?>
+                </p>
+                <p>
+                    <i class="material-icons left">email</i>
+                    <?php echo $this->identity()->getEmail();  ?>
+                </p>
+                <p>
+                    <i class="material-icons left">date_range</i>
+                    <?php echo $this->identity()->getRegDate()->format("d-m-Y");  ?>
+                </p>
+
+                <?php if($this->identity()->getLastVisit()):  ?>
+                    <p>
+                        <i class="material-icons left">schedule</i>
+                        <?php echo $this->identity()->getLastVisit()->format("d-m-Y")  ?>  
+                    </p>
+                <?php endif;  ?>
+            </div>
+                <a href="<?php echo $this->url("user",["action" => "edit"]) ?>" class="btn waves-effect waves-light left log" style="margin: 2% 0 10px 2%;   ">
+                    <i class="material-icons left">edit</i>
+                    Edit
+                </a>
+                <a href="<?php echo $this->url("user",["action" => "logout"]) ?>" class="btn waves-effect waves-light left log" style="margin: 2% 0 10px 2%;   ">
+                    <i class="material-icons right">exit_to_app</i>
+                    Logout
+                </a>
+        </div>
+        <div class="orders col  s6">
+
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">shopping_cart</i>My orders</div>
+                  <div class="collapsible-body">
+                    
+                    <table>
+                        <tr>                            
+                            <th>#</th>
+                            <th>Order id</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                            <th>Action</th>
+                        </tr>
+                        <?php 
+                            if(isset($orders)) if(is_array($orders)): 
+                                $count = 1; 
+                                foreach($orders as $order): 
+                                    
+                        ?>
+                        <tr>
+                            
+                            <td><?php echo $count; $count++;  ?></td>
+                            <td><?= $order->getId() ?></td>
+                            <td><?= $order->getOrderDate()->format("d-m-Y") ?></td>
+                            <td>
+                                <a href="<?= $this->url("user",["action" => "view-order","id" => $order->getId()])?>" class="cursor">View</a>
+                            </td>
+                            <td>
+                                <a data-id="<?=$order->getId()?>" class="remove-order cursor">Remove</a>
+                            </td>
+
+                        </tr>
+                    <?php endforeach; endif;  ?>
+                    <?php if(empty($orders)): ?>
+                        <tr>
+                            <td colspan="5">NO ORDERS</td>
+                        </tr>
+
+                    <?php endif; ?>
+                    </table>
+                    
+                  </div>
+                </li>
+
+                <?php 
+                    if($this->identity()) if($this->identity()->getRole() == 3): 
+                ?>
+                <li>
+                  <div class="collapsible-header"><a href="/admin" class="left" style="width: 100%; height: 100%; "><i class="material-icons">view_module</i>Admin</a></div>
+                  
+                </li>
+                <?php endif;  ?>
+              </ul>
+        </div>
+
+        
+    </div>
+    
+	<p style="clear: both; "></p>
+
+    </div><!-- !.products_main -->
+
+</div><!-- !.section_inwrapper -->

@@ -1,0 +1,87 @@
+<?= $this->doctype() ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('ByteShop')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+            ->prependStylesheet($this->basePath('css/style.css'))
+            ->prependStylesheet($this->basePath('css/materialize.css'))
+            ->prependStylesheet($this->basePath('css/jquery.bxslider.css'))
+            ->prependStylesheet($this->basePath('css/flexslider.css'))
+            ->prependStylesheet($this->basePath('css/lightbox.css'))
+            ->prependStylesheet($this->basePath('css/area.css'))
+        ?>
+        <?= $this->headScript()
+            ->prependFile($this->basePath('js/jquery.flexslider.js'))
+            ->prependFile($this->basePath('js/jquery.imgareaselect.js'))
+            ->prependFile($this->basePath('js/jquery.bxslider.js'))
+            ->prependFile($this->basePath('js/lightbox.js'))
+            ->prependFile($this->basePath('js/materialize.js'))
+            ->prependFile($this->basePath('js/masonry.pkgd.js'))
+            ->prependFile($this->basePath('js/index.js'))
+            ->prependFile($this->basePath('js/shop.js'))
+            ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+        ?>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    </head>
+    <body>
+        <div id="wrapper">
+            <header>
+                <div class="header_inwrapper">
+                    <a id="logo"  href="<?= $this->url("home")?>" class="waves-effect"></a>
+                    <nav>
+                        <ul class="right">
+                            <?php 
+                                $partialMenu = array('layout/topnav.phtml','default');
+                                $this->navigation('navigation')->menu()->setPartial($partialMenu);  
+                                echo $this->navigation("navigation");  
+                            ?>                           
+                        </ul>
+                    </nav>                 
+                </div>
+            </header>
+            <section id="section">
+                <?= $this->content ?>                
+            </section>
+            <div class="fakefooter"></div>
+        </div>
+        <footer>
+            <div id="footer">
+                <div class="">
+                    <div class="row">
+                      <div class="col l6 s12">
+                        <h5 class=""> Site description</h5>
+                        <p class="text-lighten-4">Site description goes here</p>
+                      </div>
+                      <div class="col l4 offset-l2 s12">
+                        <h5 class="">Popular pages</h5>
+                        <ul>
+                          <li><a class="color" href="<?= $this->url("main",["action"=>"cats"])?>">Categories</a></li>
+                          <li><a class="color" href="<?= $this->url("main",["action"=>"cats","id"=>2])?>">Mobiles</a></li>
+                          <li><a class="color" href="<?= $this->url("main",["action"=>"cats","id"=>1])?>">Computers</a></li>
+                          <li><a class="color" href="<?= $this->url("user",["action"=>"signin"])?>">Signin</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer-copyright">
+                    <div>
+                    © 2017
+                    <a class="grey-text text-lighten-4 right" href="#!">SHOP</a>
+                    </div>
+                  </div>                
+            </div>
+        </footer>
+    </body>
+        <?= $this->inlineScript() ?>
+</html>

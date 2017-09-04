@@ -1,0 +1,51 @@
+<div class="section_inwrapper">
+    <div class="products_main row" style="padding: 20px 0; ">
+    	<a href="/admin" class="left btn waves-effect waves-light">
+    		<i class="material-icons left">arrow_back</i>
+    		Admin panel
+    	</a>
+    	<p style="clear: both; padding: 5px 0;"></p>
+
+    	<p class="title_ left">
+    		<i class="material-icons left">add</i>
+        	Add category
+    	</p>
+    	<p style="clear: both; "></p>
+    	<div class="col s6 formContainer">
+    		<div class="progress"><div class="indeterminate"></div></div>
+    	<?php 
+	    	$form->setAttribute("action",$this->url("admin",["action" => "add-prod"])); 
+	    	$form->prepare(); 
+
+	    	echo $this->form()->openTag($form); 
+
+	    		$e = $form->get("title"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>title</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	    ?>
+				<?php
+					$e = $form->get("picture"); 
+					echo '<div class="file-field input-field clear">
+							<div class="btn">
+							<span><i class="material-icons left">add_a_photo</i>Picture</span>'; 
+		            echo $this->formFile($e); 
+
+					echo '</div>
+				          <div class="file-path-wrapper">
+				          	<input class="file-path validate" type="text">
+				          </div>
+				          </div>'; 
+				?>
+	            <button class="btn waves-effect left orange" type="submit">Add category
+	               <i class="material-icons left">save</i>
+	            </button>
+	    <?php 
+	    	echo $this->form()->closeTag(); 
+	     ?>
+	     </div>
+    </div>
+</div>

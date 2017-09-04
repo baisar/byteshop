@@ -1,0 +1,28 @@
+<div class="section_inwrapper row">
+
+	<a href="/user/edit" class="btn waves-effect waves-light" style="margin: 20px 0; ">
+		<i class="material-icons left">arrow_back</i>
+		Back
+	</a>
+	<p style="clear: both; padding: 0px 0 0; "></p>
+	
+
+	<p class="imgCrop"><b>Img crop</b></p>
+	<div style="padding: 10px; border: 1px solid orange; " class="left col s6">
+		<img src="<?php echo $this->basePath("img/user/{$this->identity()->getAvatar()}") ?>" id="crop" width="100%">
+	</div>
+
+
+	<form id="cropImg">
+		<input type="hidden" name="x1">
+		<input type="hidden" name="y1">
+		<input type="hidden" name="x2">
+		<input type="hidden" name="y2">
+		<input type="hidden" name="breite">
+		<input type="hidden" name="hohe">
+		<button class="btn waves-effect waves-light left " type="submit" style="margin-left: 2%; ">Crop
+		 <i class="material-icons right">crop</i>
+		</button>
+	</form>
+	<p style="clear: both; padding: 20px; "></p>
+</div>

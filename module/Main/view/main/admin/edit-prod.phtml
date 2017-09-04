@@ -1,0 +1,151 @@
+<div class="section_inwrapper">
+
+    <div class="products_main row" style="padding: 20px 0; ">
+
+    	<a href="/admin" class="left btn waves-effect waves-light">
+    		<i class="material-icons left">arrow_back</i>
+    		Admin panel
+    	</a>
+    	<p style="clear: both; padding: 5px 0;"></p>
+    	<p class="title_ left">
+    		<i class="material-icons left">edit</i>
+        	Edit product
+    	</p>
+    	<p style="clear: both; "></p>
+    	<div class="col s6 formContainer">
+    		<div class="progress"><div class="indeterminate"></div></div>
+    	<?php 
+	    	$form
+	    		->setAttribute("action",$this->url("admin",["action" => "add-prod"]))
+	    		->setAttribute("id","EditProd")
+	    		->prepare(); 
+
+	    	echo $this->form()->openTag($form); 
+
+	    		$e = $form->get("title"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>title</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	            $e = $form->get("short"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>description</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	            $e = $form->get("description"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>description</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	            $e = $form->get("price"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>attach_money</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	            $e = $form->get("rest"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>view_module</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	            $e = $form->get("cat"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>filter</i>"; 
+	            echo $this->formSelect($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+	    ?>
+				<?php
+					$e = $form->get("picture"); 
+					echo '<div class="file-field input-field clear">
+							<div class="btn">
+							<span><i class="material-icons left">add_a_photo</i>'; 
+							if($product->getPicture()) echo "Change main picture"; 
+							else echo "Add main picture";
+							echo "</span>";  
+		            echo $this->formFile($e); 
+
+					echo '</div>
+				          <div class="file-path-wrapper">
+				          	<input class="file-path validate" type="text">
+				          </div>
+				          </div>'; 
+
+		            $e = $form->get("otherPics"); 
+					echo '<div class="file-field input-field">
+							<div class="btn">
+							<span><i class="material-icons left">add_to_photos</i>Add new pictures</span>'; 
+		            echo $this->formFile($e); 
+
+					echo '</div>
+				          <div class="file-path-wrapper">
+				          	<input class="file-path validate" type="text">
+				          </div>
+				          </div>'; 
+				?>
+	            <button class="btn waves-effect left orange" type="submit">Save changes
+	               <i class="material-icons left">save</i>
+	            </button>
+	    <?php 
+	    	echo $this->form()->closeTag(); 
+	     ?>
+	     </div>
+	     
+
+
+	     <div class="col s6">
+	     	
+	     	<div class="left col s12 view1 radius">
+	     		<p>
+	     			<i class="material-icons left">assistant_photo</i>
+	     			<span class="left">Main picture</span>
+	     		</p>
+	     		<p style="clear: both; padding: 5px; "></p>
+	     		<?php if($product->getPicture()):  ?>
+					<a href="<?php echo $this->basePath("img/products/".$product->getPicture()) ?>" data-lightbox="roadtrip" class="remove-wrapper">
+						<span class="remove-prod" data-img="<?=$product->getPicture()?>">X</span>
+						<img src="<?php echo $this->basePath("img/products/small/".$product->getPicture()) ?>" >
+					</a>
+				<?php else:  ?>
+					<div class="no-photo">
+						<i class="material-icons left no_photo">photo</i>
+					</div>
+				<?php endif;  ?>
+				<p style="clear: both; padding: 5px; "></p>
+				<?php 
+					if($product->getOtherPics()): 
+						$array = json_decode($product->getOtherPics(),1); 
+					// print_r($array); 
+						if(is_array($array)): ?>
+						<ul class="bxslider">
+							<?php 
+							foreach ($array as $key => $value): ?>
+								<li>
+									<a href="<?php echo $this->basePath("img/products/".$value) ?>" data-lightbox="roadtrip" class="remove-wrapper-carousel">
+										<span class="remove-prod-carousel" data-img="<?=$value?>">X</span>
+										<img src="<?php echo $this->basePath("img/products/small/".$value) ?>" class="right" width="100">
+									</a>
+								</li>			
+							<?php 
+							endforeach; ?>
+						</ul>
+						<?php 
+						endif; 
+					endif; 
+				?>
+			</div>
+			<div class="hide">
+				<input type="hidden" class="product_id" value="<?=$product->getId()?>">
+			</div>
+	     </div>
+    </div>
+</div>

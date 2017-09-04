@@ -1,0 +1,49 @@
+<div class="section_inwrapper">
+
+	<a href="<?= $this->url("main",["action" => "cats","id" =>$product->getCat()->getId()])?>" class="btn waves-effect waves-light" style="margin: 20px 0; ">
+		<i class="material-icons left">arrow_back</i>
+		<?= $product->getCat()->getTitle()?>
+	</a>
+
+	<div class="products_main view_cont" style="padding-top: 0px; ">
+		<div class="view row">
+			<div class="left col s4 view1 radius">
+				<a href="<?php echo $this->basePath("img/products/".$product->getPicture()) ?>" data-lightbox="roadtrip">
+					<img src="<?php echo $this->basePath("img/products/small/".$product->getPicture()) ?>" >
+				</a>
+				<p style="clear: both; padding: 5px; "></p>
+				<?php 
+					if($product->getOtherPics()): 
+						$array = json_decode($product->getOtherPics(),1); 
+						if(is_array($array)): ?>
+						<ul class="bxslider">
+							<?php 
+							foreach ($array as $key => $value): ?>
+								<li>
+									<a href="<?php echo $this->basePath("img/products/".$value) ?>" data-lightbox="roadtrip">
+										<img src="<?php echo $this->basePath("img/products/small/".$value) ?>" class="right" width="100">
+									</a>
+								</li>			
+							<?php 
+							endforeach; ?>
+						</ul>
+						<?php 
+						endif; 
+					endif; 
+				?>
+			</div>
+			<div class="left col s8" style="padding-left: 40px; ">
+				<h2 class="titleview"><?= $product->getTitle() ?></h2>
+				<p class="pview"><?= $product->getShort() ?></p>
+				<p class="pview"><?= $product->getDescription() ?></p>
+				<p class="pview"><b>$<?= $product->getPrice() ?></b></p>
+				<p style="clear: both; padding: 10px; "></p>
+				<a class="btn waves-effect waves-light add-to-cart-btn" data-prod-id="<?php echo $product->getId() ?>">
+					<i class="material-icons left">add</i>
+					Add to cart
+				</a>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,27 @@
+<div class="section_inwrapper">
+    <h1>
+        <i class="material-icons left">filter</i>
+        Categories
+    </h1>
+    <div class="products_main">
+
+        <div class="grid">
+        <?php
+            foreach($cats as $cat): 
+        ?>
+            <div class="grid-item">
+                <a href="<?php echo $this->url("main",["action" => "cats","id" => $cat->getId()]) ?>" class="waves-effect">
+                    <div class="">
+                        <img src="<?php echo $this->basePath("img/cats/small/".$cat->getPicture()) ?>" width="100%" class="waves-effect">
+                        <span class="title radius"><?php echo $cat->getTitle() ?></span>
+                    </div>
+                </a>
+            </div>        
+        <?php endforeach;  ?>
+
+        </div><!-- !.grid -->
+        
+
+    </div><!-- !.products_main -->
+
+</div><!-- !.section_inwrapper -->

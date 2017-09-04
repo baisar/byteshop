@@ -1,0 +1,40 @@
+<?php //echo "<pre>".print_r($products,1)."</pre>";  ?>
+<div class="section_inwrapper">
+    <h1>
+        <i class="material-icons left">view_module</i>
+        Products
+    </h1>
+    <div class="products_main">
+
+        <div class="grid">
+        <!-- linking to categories -->
+            <div class="grid-item cats grid-a">
+                <a href="<?php echo $this->url("main",["action" => "cats"]) ?>" class="waves-effect" >
+                    <div class="">
+                        <span>All categories</span>
+                        <i class="material-icons left">filter</i>                                        
+                    </div>
+                </a>
+            </div>  
+        <!-- ! linking to categories -->
+        <?php
+            foreach($products as $cat): 
+        ?>
+            <div class="grid-item" style=" ">
+                <a href="<?php echo $this->url("main",["action" => "view","id" => $cat->getId()]) ?>" class="waves-effect" >
+                    <div class="">
+                        <img src="<?php echo $this->basePath("img/products/small/".$cat->getPicture()) ?>" width="100%" class="waves-effect">
+                        <span class="title radius"><?php echo $cat->getTitle() ?></span>
+                        <span class="main_prodprice radius">$<?php echo $cat->getPrice() ?></span>
+                    </div>
+                </a>
+            </div>        
+        <?php endforeach;  ?>
+        <?php if(!isset($products[0])):  ?>
+            <p style="padding-left: 20px; font-size: 20px;">No products</p>
+        <?php endif;  ?>
+        </div><!-- !.grid -->
+
+    </div><!-- !.products_main -->
+
+</div><!-- !.section_inwrapper -->

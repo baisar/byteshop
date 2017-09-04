@@ -1,0 +1,108 @@
+<div class="section_inwrapper row">
+
+    <h1>Checkout</h1>
+    
+    <div class="products_main col s6 formContainer" style="padding: 20px !important;">
+     <div class="progress"><div class="indeterminate"></div></div>
+	
+    	<?php           
+          $form->setAttribute("action",$this->url("main",["action" => "checkout"]));
+          $form->prepare(); 
+
+          echo $this->form()->openTag($form); 
+
+          $e = $form->get("name");       
+          $e->setAttribute("placeholder","min 4, max 20 symbols"); 
+          echo "<div class='input-field col s12'>"; 
+          echo "<i class='material-icons prefix'>person</i>"; 
+          echo $this->formInput($e); 
+          echo $this->formLabel($e);  
+          echo "</div>"; 
+
+          $e = $form->get("cell");       
+          $e->setAttribute("placeholder","must contain 9 symbols, ex (55X XX XX XX)"); 
+          echo "<div class='input-field col s12'>"; 
+          echo "<i class='material-icons prefix'>phone</i>"; 
+          echo $this->formInput($e); 
+          echo $this->formLabel($e);  
+          echo "</div>"; 
+       
+          $e = $form->get("email"); 
+          $e->setAttribute("placeholder","example@gmail.com"); 
+          echo "<div class='input-field col s12'>"; 
+          echo "<i class='material-icons prefix'>email</i>"; 
+          echo $this->formInput($e); 
+          echo $this->formLabel($e); 
+          echo "</div>"; 
+
+          $e = $form->get("address"); 
+          $e->setAttribute("placeholder","min 4, max 100 symbols"); 
+          echo "<div class='input-field col s12'>"; 
+          echo "<i class='material-icons prefix'>location_on</i>"; 
+          echo $this->formInput($e); 
+          echo $this->formLabel($e); 
+          echo "</div>"; 
+
+          $e = $form->get("comment"); 
+          $e->setAttribute("placeholder","min 4, max 200 symbols"); 
+          echo "<div class='input-field col s12'>"; 
+          echo "<i class='material-icons prefix'>message</i>"; 
+          echo $this->formInput($e); 
+          echo $this->formLabel($e); 
+          echo "</div>"; 
+
+          ?>
+          <button class="btn waves-effect waves-light right" type="submit">Submit
+             <i class="material-icons right">send</i>
+          </button>
+       <?php
+          echo $this->form()->closeTag(); 
+       ?>
+    </div>
+
+
+    <div class="col s6">
+      
+    <table>
+      <tr>
+        <th>#</th>
+        <th>title</th>
+        <th>count</th>
+        <th>price</th>
+        <th>total</th>
+      </tr>
+
+      <?php
+        $count = 1; 
+        $totalCount = $itemCount = $totalPrice =  0; 
+        
+        foreach($products as $prod): 
+      ?>
+        <tr>
+          <td>
+            <?php echo $count; $count++;  ?>
+          </td>
+          <td><?php echo $prod->getTitle();  ?></td>
+          <td>
+            
+          <?php
+            foreach($orders as $key => $value): 
+              if($key == $prod->getId()){
+                echo $value; 
+                $itemCount = $value; 
+                $totalCount += $value; 
+                $totalPrice += $value * $prod->getPrice(); 
+              }
+            endforeach; ?>
+          </td>
+          <td>$ <?php echo $prod->getPrice();  ?></td>
+          <td>$ <?= $prod->getPrice()* $itemCount ?></td>
+        </tr>
+
+      <?php endforeach;  ?>
+      <tr><td></td><td></td><td><?php echo $totalCount;  ?></td><td></td><td>$ <?php echo $totalPrice ?></td></tr>
+    </table>
+
+    </div>
+
+</div><!-- !.section_inwrapper -->

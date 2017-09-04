@@ -1,0 +1,56 @@
+                    <?php //echo "<pre>".print_r($products,1)."</pre>";  ?>
+<div class="section_inwrapper">
+    <div class="products_main row" style="padding: 0px 0 20px; ">
+	
+    <h1>Signin</h1>
+    	<div class="col s6 formContainer">
+         	<div class="progress"><div class="indeterminate"></div></div>
+         	<p>
+         		Login: beks.sch@gmail.com <br>
+         		Pass: pass
+         	</p>
+	        <?php 
+	        	$form->setAttribute("action",$this->url("user",["action" => "signin"])); 
+	        	$form->prepare(); 
+
+	        	echo $this->form()->openTag($form); 
+
+	        		$e = $form->get("email"); 
+		            echo "<div class='input-field col s12'>"; 
+		            echo "<i class='material-icons prefix'>email</i>"; 
+		            echo $this->formInput($e); 
+		            echo $this->formLabel($e); 
+		            echo "</div>"; 
+
+		            $e = $form->get("pass"); 
+		            echo "<div class='input-field col s12'>"; 
+
+		            echo "<i class='material-icons prefix'>security</i>"; 
+		            echo $this->formInput($e); 
+		            echo $this->formLabel($e); 
+		            echo "</div>"; 
+
+		            $e = $form->get("checkbox"); 
+		            echo "<div style='padding-left: 44px;'>"; 
+		            echo $this->formInput($e); 
+		            echo $this->formLabel($e); 
+		            echo "</div>"; 
+		    ?>
+		    		<p style="clear: both; padding: 7.7px 0;"></p>
+		            <button class="btn waves-effect left " type="submit">Signin
+		               <i class="material-icons right">send</i>
+		            </button>
+		    <?php 
+	        	echo $this->form()->closeTag(); 
+	         ?>
+         </div>
+
+         <div class="col s6" style="padding-left: 20px; ">
+         	<a class="waves-effect btn" href="<?php echo $this->url("user",["action" => "signup"]) ?>">
+       			Signup
+       		</a>
+       	</div>
+
+    </div><!-- !.products_main -->
+
+</div><!-- !.section_inwrapper -->

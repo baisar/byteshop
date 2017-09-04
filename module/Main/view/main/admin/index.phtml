@@ -1,0 +1,152 @@
+<div class="section_inwrapper">
+    <div class="products_main row" style="padding: 20px 0; ">
+    	
+    <p class="admin_p">Admin panel</p>
+    <div class="orders col  s6">
+
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">filter</i>Categories</div>
+                  <div class="collapsible-body">
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Edit</th>
+                                <th>Remove</th>
+                                <th>Products</th>
+                            </tr>
+                            <?php
+                                if(isset($cats)) if(is_array($cats)): 
+                                    $count = 1; 
+                                foreach($cats as $cat): 
+                            ?>
+                            <tr data-cat-id="<?=$cat["id"]?>">
+                                <td><?php echo $count; $count++;  ?></td>
+                                <td>
+                                    <?= $cat["title"] ?>
+                                </td>
+                                <td>
+                                    <a href="/admin/edit-cat/<?= $cat["id"] ?>" class="btn but">Edit</a>
+                                </td>
+                                <td>
+                                    <a class="remove-cat btn but" data-id="<?= $cat["id"] ?>">Remove</a>
+                                </td>
+                                <td>
+                                    <?php
+                                        if(isset($productsCount)) if(is_array($productsCount)): 
+                                            foreach ($productsCount as $key => $value) {
+                                                if($cat["id"] == $key) echo $value; 
+                                            }
+                                        endif; 
+                                    ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; endif; ?>
+                                
+                        </table>
+                  </div>
+                </li>
+                <li>
+                  <div class="collapsible-header">
+                    <a href="/admin/edit-prod" class="left" style="width: 100%; height: 100%; "><i class="material-icons">edit</i>Edit / Remove products</a></div>
+                </li>
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">people</i>Users</div>
+                  <div class="collapsible-body">
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>Nick</th>
+                                <th>Email</th>
+                                <th>Registered date</th>
+                                <th>Email confirmed</th>
+                            </tr>
+                            <?php
+                                if(isset($users)) if(is_array($users)): 
+                                    $countUsers = 1; 
+                                foreach($users as $user): 
+                            ?>
+                            <tr>
+                                <td><?php echo $countUsers; $countUsers++;  ?></td>
+                                <td>
+                                    <?= $user["nick"] ?>
+                                </td>
+                                <td>
+                                    <?= $user["email"] ?>
+                                </td>
+                                <td>
+                                    <?= $user["regDate"]->format("d-m-Y") ?>
+                                </td>
+                                <td>
+                                    <?= gettype($user["emailConfirmed"]) ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; endif; ?>
+                                
+                        </table>
+                  </div>
+                </li>
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">shopping_cart</i>Orders</div>
+                  <div class="collapsible-body">
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>Id</th>
+                                <th>View</th>
+                                <th>Date</th>
+                                <th>Remove</th>
+                            </tr>
+                            <?php
+                                if(isset($orders)) if(is_array($orders)): 
+                                    $countOrders = 1; 
+                                foreach($orders as $order): 
+                            ?>
+                            <tr>
+                                <td><?php echo $countOrders; $countOrders++;  ?></td>
+                                <td>
+                                    <?= $order["id"] ?>
+                                </td>
+                                <td>
+                                    <?= $order["orderDate"]->format("d-m-Y") ?>
+                                </td>
+                                <td>
+                                    <a href="/admin/order/<?= $order["id"] ?>">Remove</a>
+                                </td>
+                                <td>
+                                    <a href="/admin/remove-order/<?= $order["id"] ?>">Remove</a>
+                                </td>
+                            </tr>
+                            <?php endforeach; endif; ?>
+                                
+                        </table>
+                  </div>
+                </li>
+                <!-- <li>
+                  <div class="collapsible-header"><a href="/admin" class="left" style="width: 100%; height: 100%; "><i class="material-icons">add</i>Add slider</a></div>
+                  
+                </li> -->
+                  
+            </ul>
+    </div>
+
+    <div class="col s6">
+        <div class="grid">
+            <div class="grid-item addItem">
+                <a href="/admin/add-prod" class="left waves-effect add">
+                    <i class="material-icons">add</i>
+                    <p>Add product</p>
+                </a>
+            </div>
+            <div class="grid-item addItem">
+                <a href="/admin/add-cat" class="left waves-effect add">
+                    <i class="material-icons">filter</i>
+                    <p>Add category</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+</div>

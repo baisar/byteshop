@@ -1,0 +1,98 @@
+<div class="section_inwrapper">
+
+	<a href="/user" class="btn waves-effect waves-light" style="margin: 20px 0; ">
+		<i class="material-icons left">arrow_back</i>
+		Back
+	</a>
+	<div class="row">
+	<div class="products_main col s6" style="padding-top: 10px; ">
+    <div class="avaContainer left">
+        <?php if($this->identity()->getThumbnail() && $this->identity()->getAvatar()):  ?>
+          <a href="<?php echo $this->basePath("img/user/{$this->identity()->getAvatar()}") ?>" data-lightbox="roadtrip">
+                <img src="<?php echo $this->basePath("img/user/user{$this->identity()->getThumbnail()}") ?>" width="100%" class="left">
+                
+          </a>
+        <?php else:  ?>
+          <img src="<?php echo $this->basePath("img/noPhoto.jpg") ?>" width="100%">
+          <div class="border"></div>
+          <p style="color: #444; "><b>Please, crop img to see in avatar</b></p>
+        <?php endif;  ?>
+
+    </div>
+    <label for="avatar">
+        <a class="btn waves-effect waves-light left" type="submit" style="margin-left: 2%; ">Select a photo
+         <i class="material-icons left">add_a_photo</i>
+      </a>
+    </label>
+    <?php 
+        $avaForm->setAttribute("id","avaForm"); 
+        $avaForm->setAttribute("class","avaForm"); 
+        echo $this->form()->openTag($avaForm);  
+        $e = $form->get("avatar");       
+        $e->setAttribute("placeholder","min 4, max 20 symbols"); 
+        echo "<div class='input-field col s12' style='display: none; '>"; 
+        echo "<i class='material-icons prefix'>person</i>"; 
+        echo $this->formFile($e); 
+        echo $this->formLabel($e);  
+        echo "</div>"; 
+     ?>
+    <button class="btn waves-effect waves-light left" type="submit" style="margin: 2%; ">Submit
+       <i class="material-icons right">send</i>
+    </button>
+  <?php echo $this->form()->closeTag($avaForm);  ?>
+
+    <?php if($this->identity()->getAvatar()): ?>
+      <a href="/user/crop" class="btn waves-effect waves-light left" type="submit" style="margin: 2% 0 0 0%; ">Crop
+         <i class="material-icons left">crop</i>
+      </a>
+
+    <?php endif;  ?>
+    <p style="clear: both; padding-top: 20px;"></p>
+  </div>
+
+    <div class="editFormContainer radius col s6 formContainer">
+         <div class="progress"><div class="indeterminate"></div></div>
+    <?php           
+          $form->setAttribute("action",$this->url("user",["action" => "edit"]));
+          $form->prepare(); 
+
+          echo $this->form()->openTag($form); 
+
+          $e = $form->get("nick");       
+          $e->setAttribute("placeholder","min 4, max 20 symbols"); 
+          echo "<div class='input-field col s12'>"; 
+          echo "<i class='material-icons prefix'>person</i>"; 
+          echo $this->formInput($e); 
+          echo $this->formLabel($e);  
+          echo "</div>"; 
+
+          $e = $form->get("email");       
+          $e->setAttribute("placeholder","min 4, max 20 symbols"); 
+          echo "<div class='input-field col s12'>"; 
+          echo "<i class='material-icons prefix'>email</i>"; 
+          echo $this->formInput($e); 
+          echo $this->formLabel($e);  
+          echo "</div>"; 
+
+          $e = $form->get("cell");       
+          $e->setAttribute("placeholder","min 4, max 20 symbols"); 
+          echo "<div class='input-field col s12'>"; 
+          echo "<i class='material-icons prefix'>phone</i>"; 
+          echo $this->formInput($e); 
+          echo $this->formLabel($e);  
+          echo "</div>"; 
+             ?>
+         <button class="btn waves-effect waves-light right" type="submit">Submit
+             <i class="material-icons right">send</i>
+          </button>
+          <?php echo $this->form()->closeTag();  ?>
+        </div>
+  </div>
+
+</div>
+
+<div style="display: none; ">
+  
+
+
+</div>

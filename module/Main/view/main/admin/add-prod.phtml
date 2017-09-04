@@ -1,0 +1,100 @@
+<div class="section_inwrapper">
+    <div class="products_main row" style="padding: 20px 0; ">
+    	
+    	<a href="/admin" class="left btn waves-effect waves-light">
+    		<i class="material-icons left">arrow_back</i>
+    		Admin panel
+    	</a>
+    	<p style="clear: both; padding: 5px 0;"></p>
+
+    	<p class="title_ left">
+    		<i class="material-icons left">add</i>
+        	Add product
+    	</p>
+    	<p style="clear: both; "></p>
+    	<div class="col s6 formContainer" style="padding-top: 20px !important; ">
+    		<div class="progress"><div class="indeterminate"></div></div>
+    	<?php 
+	    	$form->setAttribute("action",$this->url("admin",["action" => "add-prod"])); 
+	    	$form->prepare(); 
+
+	    	echo $this->form()->openTag($form); 
+
+	    		$e = $form->get("title"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>title</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	            $e = $form->get("short"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>description</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	            $e = $form->get("description"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>description</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	            $e = $form->get("price"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>attach_money</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	            $e = $form->get("rest"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>view_module</i>"; 
+	            echo $this->formInput($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	            $e = $form->get("cat"); 
+	            echo "<div class='input-field col s12'>"; 
+	            echo "<i class='material-icons prefix'>filter</i>"; 
+	            echo $this->formSelect($e); 
+	            echo $this->formLabel($e); 
+	            echo "</div>"; 
+
+	    ?>
+				<?php
+					$e = $form->get("picture"); 
+					echo '<div class="file-field input-field clear">
+							<div class="btn">
+							<span><i class="material-icons left">add_a_photo</i>Main picture</span>'; 
+		            echo $this->formFile($e); 
+
+					echo '</div>
+				          <div class="file-path-wrapper">
+				          	<input class="file-path validate" type="text">
+				          </div>
+				          </div>'; 
+
+		            $e = $form->get("otherPics"); 
+					echo '<div class="file-field input-field">
+							<div class="btn">
+							<span><i class="material-icons left">add_to_photos</i>Other pictures</span>'; 
+		            echo $this->formFile($e); 
+
+					echo '</div>
+				          <div class="file-path-wrapper">
+				          	<input class="file-path validate" type="text">
+				          </div>
+				          </div>'; 
+				?>
+	    		<p style="clear: both; padding: 7.7px 0;"></p>
+	            <button class="btn waves-effect left orange" type="submit">Save product
+	               <i class="material-icons left">save</i>
+	            </button>
+	    <?php 
+	    	echo $this->form()->closeTag(); 
+	     ?>
+	     </div>
+    </div>
+</div>

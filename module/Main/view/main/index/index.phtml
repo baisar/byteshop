@@ -1,0 +1,39 @@
+                    <?php //echo "<pre>".print_r($products,1)."</pre>";  ?>
+<div class="section_inwrapper">
+
+    <!-- <div id="slider" style="height: 400px; background: wheat; ">
+        <ul class="slides">
+            <li>
+                <img src="<?php echo $this->basePath("img/slider.jpg") ?>">
+            </li>
+            <li>
+                <img src="<?php echo $this->basePath("img/byte.jpg") ?>">
+            </li>                        
+        </ul>
+    </div> --><!-- !#slider -->
+
+    <h1>Byteshop - Electronics</h1>
+    <p style="margin: -10px 0 10px; ">TOP 10 PRODUCTS</p>
+    <div class="products_main">
+
+        
+        <?php if(empty($products)) echo "<p class='noprod'>No products</p>" ?>
+        <div class="grid">
+        <?php
+            foreach($products as $cat): 
+        ?>
+            <div class="grid-item" style=" ">
+                <a href="<?php echo $this->url("main",["action" => "view","id" => $cat->getId()]) ?>" class="waves-effect" >
+                    <div class="">
+                        <img src="<?php echo $this->basePath("img/products/small/".$cat->getPicture()) ?>" width="100%" class="waves-effect">
+                        <span class="title radius"><?php echo $cat->getTitle() ?></span>
+                        <span class="main_prodprice radius">$<?php echo $cat->getPrice() ?></span>
+                    </div>
+                </a>
+            </div>        
+        <?php endforeach;  ?>
+        </div><!-- !.grid -->
+
+    </div><!-- !.products_main -->
+
+</div><!-- !.section_inwrapper -->

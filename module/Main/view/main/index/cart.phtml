@@ -1,0 +1,91 @@
+<div class="section_inwrapper">
+    <h1>
+        <i class="material-icons left">shopping_cart</i>
+        Cart
+    </h1>
+    <?php if(!empty($orders)):  ?>
+        <div class="products_main">
+        <div class="tableContainer radius formContainer">
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>count</th>
+                    <th>price</th>
+                    <th>total</th>
+                    <th></th>
+                </tr>
+            		<?php $countList = 1;  ?>
+                <?php
+                    if(isset($products) && isset($orders)): 
+                        // var, used to show all total items user buys
+                        $total = $totalPrice = 0; 
+                    foreach($products as $prod):
+                ?>
+                    <tr data-id="<?php echo $prod->getId() ?>">
+                        <td>
+                            <?php echo $countList; $countList++; ?>
+                        </td>
+                        <td> <?php echo $prod->getTitle() ?> </td>
+                        <td> <?php echo $prod->getShort() ?> </td>
+                        <td>
+                    		<?php 
+                                $count = 0; 
+                                // $key is the product id and $order is the count of the product
+                                foreach($orders as $key => $order){
+                        			 if($key == $prod->getId()) {
+                                        echo $order; 
+                                        // count of the product
+                                        $count = $order; 
+
+                                        // total items 
+                                        $total += $count; 
+                                    } 
+                    			}
+                            ?>
+                            
+                        </td>
+                        <td>$ <?php echo $prod->getPrice() ?></td>
+                        <td>$ 
+                            <?php 
+                                echo $prod->getPrice() * $count; 
+                                $totalPrice += $prod->getPrice() * $count; 
+                            ?>
+                        </td>
+                            
+                        <td><a class="remove cursor waves-effect" data-remove="<?php echo $prod->getId() ?>"> Remove </a></td>
+                    </tr>
+                <?php 
+                    endforeach;
+                ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><?php echo $total;  ?></td>
+                        <td></td>
+                        <td>$ <?php echo $totalPrice;  ?></td>
+                    </tr>
+                <?php  
+                    endif; 
+                ?>
+            </table>
+        </div>
+
+
+            <a class="btn waves-effect waves-light left removeAll" style="margin: 20px 10px 0 0; ">
+                <i class="material-icons left">remove</i>
+                remove
+            </a>
+            <a href="/checkout" class="btn waves-effect waves-light left" style="margin: 20px 0; ">
+                <i class="material-icons right">send</i>
+                checkout
+            </a>
+        </div><!-- !.products_main -->
+
+        <?php else:  ?>
+            Cart is empty
+        <?php endif;  ?>
+
+</div><!-- !.section_inwrapper -->

@@ -1,0 +1,42 @@
+<?php
+foreach ($this->container as $page):
+?>
+	<?php if($page->action == "signin" && $this->identity()) continue;  ?>
+	<?php if($page->route == "user" && $page->action == "index" && !$this->identity()) continue;  ?>
+	<li>
+		<a href="
+			<?php 
+    			echo $page->getHref()
+			?>
+		"
+		<?php if($page->isActive()) echo "class='page_active'" ?>
+		<?php 
+		if (!empty($page->pages))
+		{
+		    foreach ($page->pages as $subpage) 
+		    {
+		        if ($subpage->isActive()) echo "class='page_active'";
+		    }
+		}
+		?>
+>
+			<?php if($page->icon): ?>
+				<i class="material-icons left"><?=$page->icon?></i>
+			<?php endif;  ?>
+
+			<?php // show the count of items of the cart ?>
+			<?php if($page->getHref() == "/cart"):  ?>
+				<span class="countContainer">
+				<?php if(isset($this->layout()->totalItems)): ?>
+	                <span class="badge cartItems"><?= $this->layout()->totalItems; ?></span>
+	            <?php endif;  ?>
+	            </span>
+            <?php endif;  ?>
+
+			<span><?php echo $page->label?></span>
+		</a>
+	</li>	    	
+
+<?php
+endforeach;
+?>

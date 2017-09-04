@@ -1,0 +1,65 @@
+<div class="section_inwrapper row">
+
+	<a href="/user" class="btn waves-effect waves-light" style="margin: 20px 0; ">
+		<i class="material-icons left">arrow_back</i>
+		Back
+	</a>
+	<p style="clear: both; padding: 0px 0 0; "></p>
+	
+
+	<?php if(!isset($repo[0])): ?>
+		<p class="noprod">No order was found</p>
+	<?php else:  ?>
+		<table>
+			<tr>
+				<th>#</th>
+				<th>Product</th>
+				<th>Amount</th>
+				<th>Price</th>
+				<th>Total amount</th>
+			</tr>
+			<?php 
+			// echo count($products);
+				$count = 1;
+				$totalPrice = 0;
+				if(!empty($products)):
+
+				foreach($products as $prod):
+				// foreach()
+			 ?>
+			<tr>
+				<td><?= $count++ ?></td>
+				<td><?=$prod->getTitle(); ?></td>
+				<td>
+					<?php 
+						if($prodCounts){
+							foreach($prodCounts as $key => $value){
+								if($prod->getId() == $key){
+									echo $prodCount = $value;	
+									
+								} 
+
+									
+							}
+						}
+
+					?>
+				</td>
+				<td>$ <?= $prod->getPrice()?></td>
+				<td>$ <?php echo $prod->getPrice()*$prodCount; $totalPrice += $prod->getPrice()*$prodCount; ?></td>
+			</tr>
+				
+		<?php endforeach; endif; ?>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						$ <?php echo $totalPrice ?>
+					</td>
+				</tr>
+		</table>
+	<?php endif;  ?>
+
+</div>

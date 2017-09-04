@@ -1,0 +1,33 @@
+
+<div class="section_inwrapper">
+    <h1>
+        <i class="material-icons left">view_module</i>
+        Edit / Remove products
+    </h1>
+    <div class="products_main" style="padding-top: 0px !important; ">
+
+        <?php if(empty($products)) echo "<p class='noprod'>No products</p>";?>
+        <div class="grid">
+        
+        <?php
+            foreach($products as $prod): 
+        ?>
+            <div class="grid-item" data-id="<?=$prod->getId() ?>">
+                <a href="<?php echo $this->url("main",["action" => "view","id" => $prod->getId()]) ?>" class="waves-effect" >
+                    <div class="">
+                        <img src="<?php echo $this->basePath("img/products/small/".$prod->getPicture()) ?>" width="100%" class="waves-effect">
+                        <span class="title radius"><?php echo $prod->getTitle() ?></span>
+                        <span class="main_prodprice radius">$<?php echo $prod->getPrice() ?></span>
+                        <span class="btn_ edit-prod radius" data-refer="
+                            <?= $this->url("admin",["action" => "edit-prod","id" => $prod->getId()])?>
+                            ">Edit</span>
+                        <span class="btn_ remove-product radius waves-effect" data-id="<?=$prod->getId()?>">Remove</span>
+                    </div>
+                </a>
+            </div>        
+        <?php endforeach;  ?>
+        </div><!-- !.grid -->
+
+    </div><!-- !.products_main -->
+
+</div><!-- !.section_inwrapper -->
