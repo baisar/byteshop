@@ -15,7 +15,7 @@ By September 5, mobile version will be added.
 
 # Requirements
 
-PHP7.0 || >
+PHP7.1
 
 ## Installation
 
@@ -36,7 +36,7 @@ File shop.sql contains db structure for the repository.
       if you use phpmyadmin, open db "shop", SQL command
    2. In field SQL command copy and paste the content of shop.sql
    3. Set username and password for the doctrine to work with db in config/autoload/doctrine.global.php
-   4. That's it
+   4. Change homepage in js files for AJAX (public/js/index.js, public/js/shop.js)
 
 # 	Other resources used in repository
 
