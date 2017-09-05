@@ -58,7 +58,7 @@
 				$result = $query->getResult(); 
 				// if cat id was provided by GET param, show products, so it's better to use different view phtml
 				$view = new ViewModel(["products" => $result]); 
-				$view->setTemplate("main\index\products"); 
+				$view->setTemplate("main/index/products"); 
 				return $view; 
 			else: 
 				// get cats from db
