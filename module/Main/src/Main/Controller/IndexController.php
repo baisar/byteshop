@@ -54,10 +54,17 @@
 
 			// get cat products by id or get categories
 			if($id): 
+				// filter
+				$query2 = $manager->createQuery("SELECT u.id,u.title FROM Application\Entity\Cats u"); 
+				$catNames = $query2->getResult(); 
+
 				$query = $manager->createQuery("SELECT u FROM Application\Entity\Products u WHERE u.cat = $id"); 
 				$result = $query->getResult(); 
 				// if cat id was provided by GET param, show products, so it's better to use different view phtml
-				$view = new ViewModel(["products" => $result]); 
+				$view = new ViewModel([
+					"products" => $result,
+					"catNames" => $catNames
+					]); 
 				$view->setTemplate("main/index/products"); 
 				return $view; 
 			else: 
@@ -161,7 +168,7 @@
 				// check product if exist with such id which was provided from AJAX
 				$query = $manager->createQuery("SELECT u FROM Application\Entity\Products u WHERE u.id=$id"); 
 				$result = $query->getResult(); 
-				if(!isset($result[0])):
+				if(!isset($result)) if(!isset($result[0])):
 					echo json_encode(["status" => "error","error" => "No product was found for the id"]); 
 					exit(); 
 				endif; 
