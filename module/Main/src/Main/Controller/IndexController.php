@@ -1,8 +1,6 @@
 <?php
 	namespace Main\Controller; 
 
-#fzCB8wVOBv
-#passpass455SS14
 	use Zend\Mvc\Controller\AbstractActionController,
 		Application\Entity\Orders,
 		Zend\Session\Container,
